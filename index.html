@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Library</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="84bb4fc080631c2605f1.css">
+    <script defer src="9864596083c7fb908bba.js"></script>
+<script defer src="main.js"></script></head>
+<body>
+    <div class="header">
+        <div class="header-title">
+            <div class=welcome><b>Welcome!</b></div>
+            <div class=steps>
+                Once you apply the desired filter, the filtered data can then be downloaded. 
+                Enter and apply a new filter to see different data.
+                The new filter will be applied to the original, unfiltered data.
+            </div>
+        </div>
+        <div class="header-inputs">
+            <button id="downloadOriginal">Download Original Data</button>
+            <!-- <input type="file" id="csvFileInput" accept=".csv"> -->
+            <div>
+                <label for="filterState">Filter by State:</label>
+                <input type="text" id="filterState" placeholder="ex. New Jersey">
+                <button id="applyFilter">Apply Filter</button>
+                <button id="downloadFiltered" disabled>Download Filtered Data</button>
+            </div>
+        </div>
+    </div>
+    <div id="output"></div>
+</body>
+</html>
+
+
