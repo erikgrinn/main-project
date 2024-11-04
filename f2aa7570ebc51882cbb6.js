@@ -2,6 +2,12 @@ import './styles.css';
 import data from './files/cities_air_quality_water_pollution.18-10-2021.csv';
 import Papa from 'papaparse';
 
+const { runServer } = require("./services/server");
+const { runClient } = require("./services/client");
+
+runServer();
+runClient();
+
 let cleanData = []; // Store parsed CSV data
 let filteredData = []; // Store filtered data
 const downloadOriginalBtn = document.getElementById('downloadOriginal')
