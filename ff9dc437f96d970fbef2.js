@@ -2,6 +2,8 @@ import './styles.css';
 import data from './files/cities_air_quality_water_pollution.18-10-2021.csv';
 import Papa from 'papaparse';
 
+console.log(data)
+
 // const { runServer } = require("./services/server");
 // const { runClient } = require("./services/client");
 
@@ -20,8 +22,12 @@ cleanData = data.map(row => {
         // Clean the key: remove surrounding quotes and any leading/trailing spaces
         const cleanKey = key.trim().toLowerCase().replace(/^"|"$/g, '').replace(/\\"/g, '"');
         
-        // Clean the value: remove surrounding quotes and any leading/trailing spaces
-        const cleanValue = row[key].trim().toLowerCase().replace(/^"|"$/g, '').replace(/\\"/g, '"');
+        const value = row[key];
+        const cleanValue = typeof value === 'string' 
+            ? value.trim().toLowerCase().replace(/^"|"$/g, '').replace(/\\"/g, '"') 
+            : value;
+        // // Clean the value: remove surrounding quotes and any leading/trailing spaces
+        // const cleanValue = row[key].trim().toLowerCase().replace(/^"|"$/g, '').replace(/\\"/g, '"');
         
         // Add cleaned key-value pair to the new row object
         cleanedRow[cleanKey] = cleanValue;
@@ -37,13 +43,12 @@ console.log(cleanData.slice(0,10))
 // Filter data when the user clicks "Apply Filter"
 document.getElementById('applyStateFilter').addEventListener('click', function() {
     const filterState = document.getElementById('filterState').value.trim().toLowerCase();
-    console.log(filterState)
 
-    let uniqueStates = [...new Set(cleanData.map(row => row[1]))]; // Get unique states
+    let uniqueStates = [...new Set(cleanData.map(row => row['region']))]; // Get unique states
 
     if (filterState && uniqueStates.includes(filterState)) {
         // Filter data based on user input
-        filteredData = cleanData.filter(row => row[1] === filterState);
+        filteredData = cleanData.filter(row => row['region'] === filterState);
         console.log(filteredData)
 
         downloadFilterBtn.disabled = false
