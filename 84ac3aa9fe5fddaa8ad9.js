@@ -1,6 +1,6 @@
 import './styles.css';
 import Papa from 'papaparse';
-import citiesCSV from './files/cities_air_quality_water_pollution.18-10-2021.csv';
+import data from './files/cities_air_quality_water_pollution.18-10-2021.csv';
 
 console.log(data)
 
@@ -11,22 +11,22 @@ console.log(data)
 // runClient();
 
 // Parse the CSV data
-Papa.parse(citiesCSV, {
-    header: true,
-    dynamicTyping: true,
-    skipEmptyLines: true,
-    complete: function(results) {
-        const cleanData = results.data;
-        console.log(cleanData.slice(0,10)); // Inspect the parsed data
-    }
-});
+// Papa.parse(data, {
+//     header: true,
+//     dynamicTyping: true,
+//     skipEmptyLines: true,
+//     complete: function(results) {
+//         const cleanData = results.data;
+//         console.log(cleanData.slice(0,10)); // Inspect the parsed data
+//     }
+// });
 
 let cleanData = []; // Store parsed CSV data
 let filteredData = []; // Store filtered data
 const downloadOriginalBtn = document.getElementById('downloadOriginal')
 const downloadFilterBtn = document.getElementById('downloadFiltered')
 
-cleanData = citiesCSV.map(row => {
+cleanData = data.map(row => {
     const cleanedRow = {};
     
     Object.keys(row).forEach(key => {
