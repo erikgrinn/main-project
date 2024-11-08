@@ -1,5 +1,5 @@
 import './styles.css';
-import { createChart } from './plot';
+import { createChart } from './plot.js';
 
 import Papa from 'papaparse';
 import data from './files/US_AQI_Lite.csv';
@@ -57,21 +57,18 @@ cleanData = data.map(row => {
     });
     return cleanedRow;
 });
-// console.log(cleanData.slice(0,10))
 
-
-// Assuming parsedData is an array of objects, where each object represents a row from the CSV
-
+console.log(cleanData)
 
 // Filter data when the user clicks "Apply Filter"
 document.getElementById('applyStateFilter').addEventListener('click', function() {
     const filterState = document.getElementById('filterState').value.trim().toLowerCase();
 
-    let uniqueStates = [...new Set(cleanData.map(row => row['region']))]; // Get unique states
+    let uniqueStates = [...new Set(cleanData.map(row => row['state_id']))]; // Get unique states
 
     if (filterState && uniqueStates.includes(filterState)) {
         // Filter data based on user input
-        filteredData = cleanData.filter(row => row['region'] === filterState);
+        filteredData = cleanData.filter(row => row['state_id'] === filterState);
         console.log(filteredData)
 
         downloadFilterBtn.disabled = false
@@ -110,9 +107,5 @@ downloadFilterBtn.addEventListener('click', function() {
         alert('No data to download.');
     }
 });
-
-// createChart().then(() => {
-//     console.log('Chart has been created.');
-// });
 
 createChart()
