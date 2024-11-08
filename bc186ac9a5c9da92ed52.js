@@ -2,11 +2,9 @@ import './styles.css';
 import { createChart } from './plot';
 
 import Papa from 'papaparse';
-import data from './files/cities_air_quality_water_pollution.18-10-2021.csv';
-// current implementation uses csv-loader with webpack, wont work locally
+import data from './files/US_AQI_Lite.csv';
+// **current implementation uses csv-loader with webpack, wont work locally **
 // const csvFilePath = './files/cities_air_quality_water_pollution.18-10-2021.csv';
-
-console.log(data)
 
 // const { runServer } = require("./services/server");
 // const { runClient } = require("./services/client");
@@ -59,7 +57,7 @@ cleanData = data.map(row => {
     });
     return cleanedRow;
 });
-console.log(cleanData.slice(0,10))
+// console.log(cleanData.slice(0,10))
 
 
 // Assuming parsedData is an array of objects, where each object represents a row from the CSV
@@ -113,6 +111,8 @@ downloadFilterBtn.addEventListener('click', function() {
     }
 });
 
-createChart().then(() => {
-    console.log('Chart has been created.');
-});
+// createChart().then(() => {
+//     console.log('Chart has been created.');
+// });
+
+createChart()
