@@ -1,6 +1,6 @@
 import './styles.css';
-import data from './files/cities_air_quality_water_pollution.18-10-2021.csv';
 import Papa from 'papaparse';
+import citiesCSV from './files/cities_air_quality_water_pollution.18-10-2021.csv';
 
 console.log(data)
 
@@ -10,12 +10,23 @@ console.log(data)
 // runServer();
 // runClient();
 
+// Parse the CSV data
+Papa.parse(citiesCSV, {
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    complete: function(results) {
+        const cleanData = results.data;
+        console.log(cleanData.slice(0,10)); // Inspect the parsed data
+    }
+});
+
 let cleanData = []; // Store parsed CSV data
 let filteredData = []; // Store filtered data
 const downloadOriginalBtn = document.getElementById('downloadOriginal')
 const downloadFilterBtn = document.getElementById('downloadFiltered')
 
-cleanData = data.map(row => {
+cleanData = citiesCSV.map(row => {
     const cleanedRow = {};
     
     Object.keys(row).forEach(key => {
@@ -26,8 +37,6 @@ cleanData = data.map(row => {
         const cleanValue = typeof value === 'string' 
             ? value.trim().toLowerCase().replace(/^"|"$/g, '').replace(/\\"/g, '"') 
             : value;
-        // // Clean the value: remove surrounding quotes and any leading/trailing spaces
-        // const cleanValue = row[key].trim().toLowerCase().replace(/^"|"$/g, '').replace(/\\"/g, '"');
         
         // Add cleaned key-value pair to the new row object
         cleanedRow[cleanKey] = cleanValue;
