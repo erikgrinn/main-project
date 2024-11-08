@@ -1,4 +1,6 @@
 import './styles.css';
+import { createChart } from './plot';
+
 import Papa from 'papaparse';
 import data from './files/cities_air_quality_water_pollution.18-10-2021.csv';
 // current implementation uses csv-loader with webpack, wont work locally
@@ -109,4 +111,8 @@ downloadFilterBtn.addEventListener('click', function() {
     } else {
         alert('No data to download.');
     }
+});
+
+createChart().then(() => {
+    console.log('Chart has been created.');
 });
