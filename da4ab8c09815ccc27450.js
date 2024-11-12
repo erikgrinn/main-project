@@ -1,16 +1,17 @@
 import './styles.css';
 import { createChart } from './plot.js';
+import { fetchIQAir } from './IQAir.js'
 
 import Papa from 'papaparse';
 import data from './files/US_AQI_Lite.csv';
-// **current implementation uses csv-loader with webpack, wont work locally **
-// const csvFilePath = './files/cities_air_quality_water_pollution.18-10-2021.csv';
-
+// for zeromq if needed
 // const { runServer } = require("./services/server");
 // const { runClient } = require("./services/client");
-
 // runServer();
 // runClient();
+
+// **current implementation uses csv-loader with webpack, wont work locally **
+// const csvFilePath = './files/US_AQI_Lite.csv';
 
 // Parse the CSV data
 // Fetch the CSV file and parse it with PapaParse
@@ -108,4 +109,7 @@ downloadFilterBtn.addEventListener('click', function() {
     }
 });
 
+
+
 createChart()
+fetchIQAir()
