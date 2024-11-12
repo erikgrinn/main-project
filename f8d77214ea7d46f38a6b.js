@@ -3,7 +3,7 @@ import { createChart } from './plot.js';
 import { fetchIQAir } from './IQAir.js'
 
 import Papa from 'papaparse';
-import data from './files/US_AQI_Lite.csv';
+// import data from './files/US_AQI_Lite.csv';
 // for zeromq if needed
 // const { runServer } = require("./services/server");
 // const { runClient } = require("./services/client");
@@ -11,38 +11,38 @@ import data from './files/US_AQI_Lite.csv';
 // runClient();
 
 // **current implementation uses csv-loader with webpack, wont work locally **
-// const csvFilePath = './files/US_AQI_Lite.csv';
+const csvFilePath = './files/US_AQI_Lite.csv';
 // let parsedData = []
 
 // Parse the CSV data
 // Fetch the CSV file and parse it with PapaParse
-// fetch(csvFilePath)
-//     .then(response => response.text())  // Get the file contents as text
-//     .then(csvData => {
-//         // Parse the CSV data using PapaParse
-//         Papa.parse(csvData, {
-//         header: true, // Treat the first row as headers
-//         dynamicTyping: true, // Automatically convert numbers, booleans, etc.
-//         skipEmptyLines: true, // Ignore empty lines
-//         complete: function(results) {
-//             const parsedData = results.data; // The parsed CSV data
-//             console.log(parsedData); // Log the parsed data
-            
-//             // You can now use `parsedData` for further processing
-//         },
-//         error: function(error) {
-//             console.error('Error parsing CSV:', error);
-//         }
-//         });
-//     })
-//     .catch(error => console.error('Error loading CSV file:', error));
+
+let parsedData = []
+
+const response = await fetch(csvFilePath);
+const csvData = await response.text();
+// Parse the CSV data using PapaParse
+Papa.parse(csvData, {
+header: true, // Treat the first row as headers
+dynamicTyping: true, // Automatically convert numbers, booleans, etc.
+skipEmptyLines: true, // Ignore empty lines
+complete: function(results) {
+    parsedData = results.data; // The parsed CSV data
+    console.log(parsedData); // Log the parsed data
+    
+    // You can now use `parsedData` for further processing
+},
+error: function(error) {
+    console.error('Error parsing CSV:', error);
+}
+});
 
 let cleanData = []; // Store parsed CSV data
 let filteredData = []; // Store filtered data
 const downloadOriginalBtn = document.getElementById('downloadOriginal')
 const downloadFilterBtn = document.getElementById('downloadFiltered')
 
-cleanData = data.map(row => {
+cleanData = parsedData.map(row => {
     const cleanedRow = {};
     
     Object.keys(row).forEach(key => {
