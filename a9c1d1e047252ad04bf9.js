@@ -12,6 +12,7 @@ import data from './files/US_AQI_Lite.csv';
 
 // **current implementation uses csv-loader with webpack, wont work locally **
 // const csvFilePath = './files/US_AQI_Lite.csv';
+// let parsedData = []
 
 // Parse the CSV data
 // Fetch the CSV file and parse it with PapaParse
